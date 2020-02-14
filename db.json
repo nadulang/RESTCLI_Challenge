@@ -1,0 +1,76 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": "2",
+      "title": "json-server2",
+      "author": "typicode2"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "jajhyg",
+      "email": "world@hello.com",
+      "name": "hello"
+    },
+    {
+      "id": 2,
+      "username": "json-server",
+      "email": "typicode@test.com",
+      "name": "lalala"
+    },
+    {
+      "username": "json-server",
+      "email": "world@hello.com",
+      "name": "hello",
+      "id": 3
+    },
+    {
+      "username": "ucing",
+      "email": "ysuusgsu@world.com",
+      "name": "leon",
+      "id": 4
+    }
+  ],
+"todos": [
+        {
+            "id": 4,
+            "activity": "Jogging jam 5:00 WIB",
+            "status": true
+        },
+        {
+            "id": 5,
+            "activity": "Makan di Warteg Bu Ita",
+            "status": false
+        },
+        {
+            "id": 15,
+            "activity": "Nge-gym di Celfit",
+            "status": true
+        },
+        {
+            "id":  19,
+            "activity": "Pergi ambil kue di Cizz Cake",
+            "status": false
+        }
+    ]
+}
+
+
+
+ 
