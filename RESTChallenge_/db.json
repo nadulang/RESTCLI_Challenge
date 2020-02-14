@@ -6,19 +6,19 @@
       "status": true
     },
     {
-      "id": 2,
-      "activity": "Makan di Warteg Bu Ita",
-      "status": false
-    },
-    {
       "id": 3,
-      "activity": "Nge-gym di Celfit",
+      "activity": false,
       "status": true
     },
     {
       "id": 4,
-      "activity": "Pergi ambil kue di Cizz Cake",
+      "activity": true,
       "status": false
+    },
+    {
+      "activity": "Survey co-working space di Jogja",
+      "status": false,
+      "id": 5
     }
   ]
 }
