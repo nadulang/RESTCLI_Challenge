@@ -14,9 +14,13 @@ namespace RESTChallenge_
         typeof(ShowAll),
         typeof(AddAnItem),
         typeof(UpdateItem),
-        typeof(DeleteAnItem)
+        typeof(DeleteAnItem),
+        typeof(ClearAll),
+        typeof(SetTodoItemDone),
+        typeof(UndoneItem)
 
         )]
+
     class Program
     {
         static Task<int> Main(string[] args)
@@ -27,14 +31,8 @@ namespace RESTChallenge_
 
         
 
-        [Option(Description = "clear all todo list", ValueName = "clear")]
-        public string Clear { get; set; }
-
-        [Option(Description = "set an item(s)'s status to be completed", ValueName = "done")]
-        public string Done { get; set; }
-
-        [Option(Description = "set an item(s)'s to not complete", ValueName = "undone")]
-        public string Undone { get; set; }
+        
+        
 
 
 
@@ -117,10 +115,72 @@ namespace RESTChallenge_
 
     }
 
+    [Command(Description = "clear all todo list", Name = "clear")]
+    class ClearAll
+    {
+        public async Task OnExecuteAsync()
+        {
+
+            var prompt = Prompt.GetYesNo("You are about to clear all lists. Are you sure?", false, ConsoleColor.Red);
+
+            var client = new HttpClient();
+
+            if (prompt)
+            {
+                var result = await client.GetStringAsync("http://localhost:3000/todos");
+                var content = JsonConvert.DeserializeObject<List<TodoList>>(result);
+                var listID = new List<int>();
+
+                foreach (var actv in content)
+                {
+                    listID.Add(actv.id);
+                }
+                foreach (var actv in listID)
+                {
+                    var fix = await client.DeleteAsync($"http://localhost:3000/todos/{actv}");
+                }
+            }
+        }
+    }
+
+    [Command(Description = "set an item(s)'s status to be completed", Name = "done")]
+    class SetTodoItemDone
+    {
+        [Argument(0)]
+        public int number { get; set; }
+
+        public async Task OnExecuteAsync()
+        {
+            var client = new HttpClient();
+            var request1 = new { id = Convert.ToInt32(number), activity = true};
+            var content = new StringContent(JsonConvert.SerializeObject(request1), Encoding.UTF8, "application/json");
+            var result = await client.PatchAsync($"http://localhost:3000/todos/{number}", content);
+
+            Console.WriteLine(result);
+        }
+    }
+
+    [Command(Description = "set an item(s)'s to not complete", Name = "undone")]
+    class UndoneItem
+    {
+        [Argument(0)]
+        public int number { get; set; }
+        public async Task OnExecuteAsync()
+        {
+            var client = new HttpClient();
+            var request1 = new { id = Convert.ToInt32(number), activity = false };
+            var content = new StringContent(JsonConvert.SerializeObject(request1), Encoding.UTF8, "application/json");
+            var result = await client.PatchAsync($"http://localhost:3000/todos/{number}", content);
+
+            Console.WriteLine(result);
+        }
+
+    }
+
     public class TodoList : Requests
     {
         public int id { get; set; }
-        
+ 
     }
 
     public class Todos
