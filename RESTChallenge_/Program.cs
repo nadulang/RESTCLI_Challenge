@@ -48,7 +48,7 @@ namespace RESTChallenge_
         public async Task OnExecuteAsync()
         {
             var client = new HttpClient();
-            var result = await client.GetStringAsync("http://localhost:3000/todo");
+            var result = await client.GetStringAsync("http://localhost:3000/todos");
             var content = JsonConvert.DeserializeObject<List<TodoList>>(result);
 
             foreach (var actv in content)
@@ -74,7 +74,7 @@ namespace RESTChallenge_
             var client = new HttpClient();
             var request1 = new Requests() {activity = Add, status = false};
             var content = new StringContent(JsonConvert.SerializeObject(request1), Encoding.UTF8, "application/json");
-            var result = await client.PostAsync("http://localhost:3000/todo", content);
+            var result = await client.PostAsync("http://localhost:3000/todos", content);
 
             Console.WriteLine(result);
         }
@@ -93,7 +93,7 @@ namespace RESTChallenge_
             var client = new HttpClient();
             var request1 = new { id = Convert.ToInt32(number), activity = Add };
             var content = new StringContent(JsonConvert.SerializeObject(request1), Encoding.UTF8, "application/json");
-            var result = await client.PatchAsync($"http://localhost:3000/todo/{number}", content);
+            var result = await client.PatchAsync($"http://localhost:3000/todos/{number}", content);
 
             Console.WriteLine(result);
         }
@@ -110,7 +110,7 @@ namespace RESTChallenge_
             var client = new HttpClient();
             var request1 = new { id = Convert.ToInt32(number) };
             var content = new StringContent(JsonConvert.SerializeObject(request1), Encoding.UTF8, "application/json");
-            var result = await client.DeleteAsync($"http://localhost:3000/todo/{number}");
+            var result = await client.DeleteAsync($"http://localhost:3000/todos/{number}");
 
             Console.WriteLine(result);
         }

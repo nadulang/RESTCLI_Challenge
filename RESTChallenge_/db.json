@@ -1,19 +1,24 @@
 {
-  "posts": [
+  "todos": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "activity": "Jogging jam 5:00 WIB",
+      "status": true
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "activity": "Makan di Warteg Bu Ita",
+      "status": false
+    },
+    {
+      "id": 3,
+      "activity": "Nge-gym di Celfit",
+      "status": true
+    },
+    {
+      "id": 4,
+      "activity": "Pergi ambil kue di Cizz Cake",
+      "status": false
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
